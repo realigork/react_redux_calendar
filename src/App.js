@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 import Calendar from './components/calendar';
 
-import './App.css';
+import classes from './App.css';
 
 class App extends Component {
   render() {
     return (
-      <Calendar />
+      <div className={classes.wrapper}>
+        <Calendar />
+      </div>
     );
   }
 }
