@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 
-const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const monthsShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const calendarData = {
-  year: 2018,
-  month: 2,
-  days: [
-    { day: 1 },
-    { day: 2 },
-    { day: 3 },
-    { day: 4 },
-    { day: 5 },
-    { day: 6 },
-    { day: 7 }
-  ]
-};
+import {
+  weekdays,
+  monthsShort,
+  splitDaysIntoWeeks,
+  getCurrentDateObj,
+  getFirstDayIndex,
+  getDays,
+  getMonthTotal
+} from '../../utils/date';
 
 import classes from './calendar.css';
 
@@ -24,6 +18,19 @@ class Calendar extends Component {
     this.state = {};
 
     this.renderWeekdays = this.renderWeekdays.bind(this);
+    this.renderDays = this.renderDays.bind(this);
+    this.renderDaysRow = this.renderDaysRow.bind(this);
+  }
+
+  componentWillMount() {
+    const dateObj = getCurrentDateObj();
+    const totalDays = getMonthTotal(dateObj.year, dateObj.month);
+    const firstDayIndex = getFirstDayIndex(dateObj.year, dateObj.month);
+    const days = getDays(totalDays, firstDayIndex);
+    this.setState({
+      details: { ...dateObj },
+      days
+    });
   }
 
   renderWeekdays() {
@@ -32,9 +39,28 @@ class Calendar extends Component {
     });
   }
 
+  renderDays(row) {
+    return row.map((item, index) => {
+      return <td key={item.day}>{item.day}</td>
+    });
+  }
+
+  renderDaysRow() {
+    const allDays = this.state.days.slice(0);
+    const chunk = weekdays.length;
+    const transformed = splitDaysIntoWeeks(allDays, chunk);
+
+    return transformed.map((row, index) => {
+      const days = this.renderDays(row);
+      return <tr key={index}>{days}</tr>
+    });
+  }
+
   render() {
-    const caption = `${monthsShort[calendarData.month]}, ${calendarData.year}`;
+    const { monthName, year } = this.state.details;
+    const caption = `${monthName}, ${year}`;
     const renderWeekdays = this.renderWeekdays();
+    const renderDays = this.renderDaysRow();
     return (
       <div className={classes.calendarWrapper}>
         <table className={classes.calendar}>
@@ -45,14 +71,14 @@ class Calendar extends Component {
                 <h2>{caption}</h2>
               </th>
             </tr>
-
-            {/* Render head: short month names */}
             <tr>
               {renderWeekdays}
             </tr>
           </thead>
 
-          {/* Render body: days with reminders */}
+          <tbody>
+            {renderDays}
+          </tbody>
         </table>
       </div>
     )

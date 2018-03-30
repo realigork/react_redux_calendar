@@ -1,10 +1,16 @@
+th, td {
+  border: 1px solid #eee;
+  padding: 10px;
+}
+
 .calendar {
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
 }
 
-.calendar th {
-  border: 1px solid #eee;
-  padding: 10px;
+.calendar td {
+  height: 140px;
+  vertical-align: top;
 }
+
