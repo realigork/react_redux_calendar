@@ -26,12 +26,13 @@ class Calendar extends Component {
     this.renderWeekdays = this.renderWeekdays.bind(this);
     this.renderDays = this.renderDays.bind(this);
     this.renderDaysRow = this.renderDaysRow.bind(this);
-    this.onCellClickHandler = this.onCellClickHandler.bind(this);
+    this.onOpenPopup = this.onOpenPopup.bind(this);
     this.getReminderByDay = this.getReminderByDay.bind(this);
     this.addReminder = this.addReminder.bind(this);
     this.onClosePopup = this.onClosePopup.bind(this);
     this.renderReminderForm = this.renderReminderForm.bind(this);
     this.onReminderFormInputChange = this.onReminderFormInputChange.bind(this);
+    this.onReminderFormSubmit = this.onReminderFormSubmit.bind(this);
   }
 
   componentWillMount() {
@@ -42,6 +43,12 @@ class Calendar extends Component {
     const days = getDays(totalDays, day, firstDayIndex);
     this.setState({
       details: { ...dateObj },
+      reminderForm: {
+        day: -1,
+        start: '09:00',
+        end: '10:00',
+        text: 'Default reminder'
+      },
       reminders: [],
       reminderDay: -1,
       showPopup: false,
@@ -63,35 +70,48 @@ class Calendar extends Component {
   }
 
   addReminder() {
-    if (!day) {
-      return;
+    if (this.state.reminderForm.day > 0) {
+      const newState = {...this.state};
+      const reminders = newState.reminders.slice(0);
+      const reminder = Object.assign({}, newState.reminderForm);
+      reminders.push(reminder);
+      newState.reminders = reminders;
+      this.setState({ reminders });
     }
+  }
 
+  onOpenPopup(day) {
     const newState = {...this.state};
-    const reminders = newState.reminders.slice(0);
-
-    const reminder = {
-      start: '12:00',
-      end: '13:00',
-      text: 'This is a new reminder that you have a meeting',
-      day,
-    };
-
-    reminders.push(reminder);
-    newState.reminders = reminders;
+    const reminderForm = Object.assign({}, newState.reminderForm);
+    reminderForm.day = day;
+    newState.reminderForm = reminderForm;
+    newState.showPopup = true;
     this.setState(newState);
   }
 
-  onCellClickHandler(day) {
-    this.setState({ showPopup: true, reminderDay: day });
-  }
-
   onClosePopup() {
-    this.setState({ showPopup: false, reminderDay: -1 });
+    const newState = {...this.state};
+    const reminderForm = Object.assign({}, newState.reminderForm);
+    reminderForm.day = -1;
+    newState.reminderForm = reminderForm;
+    newState.showPopup = false;
+    this.setState(newState);
   }
 
   onReminderFormInputChange(e) {
-    console.log(e.target.value);
+    const value = e.target.value;
+    const id = e.target.id;
+    const newState = {...this.state};
+    const reminderForm = Object.assign({}, newState.reminderForm);
+    reminderForm[id] = value;
+    newState.reminderForm = reminderForm;
+    this.setState({ reminderForm: newState.reminderForm });
+  }
+
+  onReminderFormSubmit(e) {
+    e.preventDefault();
+    this.addReminder();
+    setTimeout(this.onClosePopup, 0);
   }
 
   renderWeekdays() {
@@ -114,7 +134,7 @@ class Calendar extends Component {
           day={item.day}
           isCurrent={item.isCurrent}
           reminders={reminderItem}
-          onClick={() => { this.onCellClickHandler(item.day); }}
+          onClick={() => { this.onOpenPopup(item.day); }}
         />
       )
     });
@@ -136,8 +156,9 @@ class Calendar extends Component {
       <PopupWrapper onClick={this.onClosePopup}>
         <Popup>
           <ReminderForm
-            day={this.state.reminderDay}
+            day={this.state.reminderForm.day}
             onChange={this.onReminderFormInputChange}
+            onSubmit={this.onReminderFormSubmit}
           />
         </Popup>
       </PopupWrapper>
@@ -145,6 +166,7 @@ class Calendar extends Component {
   }
 
   render() {
+    console.log(this.state.reminders);
     const { monthName, year, day } = this.state.details;
     const caption = `${monthName}, ${year}`;
     const renderWeekdays = this.renderWeekdays();

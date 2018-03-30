@@ -1,7 +1,6 @@
 .reminder {
   display: flex;
   padding: 3px;
-  border: 1px solid #ccc;
   background: #eee;
   color: #555;
   font-size: 14px;

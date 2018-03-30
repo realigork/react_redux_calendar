@@ -3,8 +3,6 @@ import Reminder from './reminder';
 
 import classes from './cell.css';
 
-import reminderIcon from '../../assets/images/alarm.svg';
-
 const Cell = ({ day, isCurrent, onClick, reminders }) => {
   let cellClass = classes.cell;
   if (day === '') {
@@ -16,7 +14,8 @@ const Cell = ({ day, isCurrent, onClick, reminders }) => {
   let reminderList = null;
   if (reminders && reminders.length || reminders !== null) {
     reminderList = reminders.map((item) => {
-      return <Reminder key={item.day} {...item} />;
+      const key = `${item.day}-${item.start}`;
+      return <Reminder key={key} {...item} />;
     });
   }
 
