@@ -27,9 +27,10 @@ class Calendar extends Component {
 
   componentWillMount() {
     const dateObj = getCurrentDateObj();
-    const totalDays = getMonthTotal(dateObj.year, dateObj.month);
-    const firstDayIndex = getFirstDayIndex(dateObj.year, dateObj.month);
-    const days = getDays(totalDays, dateObj.day, firstDayIndex);
+    const { year, month, day } = dateObj;
+    const totalDays = getMonthTotal(year, month);
+    const firstDayIndex = getFirstDayIndex(year, month);
+    const days = getDays(totalDays, day, firstDayIndex);
     this.setState({
       details: { ...dateObj },
       days
