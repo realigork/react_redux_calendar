@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import Row from './row';
+import Cell from './cell';
+
 import {
   weekdays,
   monthsShort,
@@ -26,7 +29,7 @@ class Calendar extends Component {
     const dateObj = getCurrentDateObj();
     const totalDays = getMonthTotal(dateObj.year, dateObj.month);
     const firstDayIndex = getFirstDayIndex(dateObj.year, dateObj.month);
-    const days = getDays(totalDays, firstDayIndex);
+    const days = getDays(totalDays, dateObj.day, firstDayIndex);
     this.setState({
       details: { ...dateObj },
       days
@@ -41,7 +44,7 @@ class Calendar extends Component {
 
   renderDays(row) {
     return row.map((item, index) => {
-      return <td key={item.day}>{item.day}</td>
+      return <Cell key={item.day} day={item.day} isCurrent={item.isCurrent} />
     });
   }
 
@@ -52,7 +55,7 @@ class Calendar extends Component {
 
     return transformed.map((row, index) => {
       const days = this.renderDays(row);
-      return <tr key={index}>{days}</tr>
+      return <Row key={index}>{days}</Row>
     });
   }
 
@@ -64,7 +67,6 @@ class Calendar extends Component {
     return (
       <div className={classes.calendarWrapper}>
         <table className={classes.calendar}>
-          {/* Render caption: Month, Year */}
           <thead>
             <tr>
               <th colSpan="7">

@@ -1,0 +1,8 @@
+td {
+  color: #888;
+}
+
+.isActive {
+  color: tomato;
+  font-weight: 500;
+}
