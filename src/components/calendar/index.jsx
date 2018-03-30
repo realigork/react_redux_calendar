@@ -38,8 +38,8 @@ class Calendar extends Component {
     });
   }
 
-  onCellClickHandler(index) {
-    console.log(index)
+  onCellClickHandler(day) {
+    console.log(day);
   }
 
   renderWeekdays() {
@@ -56,7 +56,7 @@ class Calendar extends Component {
           key={key}
           day={item.day}
           isCurrent={item.isCurrent}
-          onClick={(e) => { this.onCellClickHandler(e); }}
+          onClick={() => { this.onCellClickHandler(item.day); }}
         />
       )
     });

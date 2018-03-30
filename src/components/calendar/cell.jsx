@@ -2,11 +2,11 @@ import React from 'react';
 
 import classes from './cell.css';
 
-const Cell = ({ day, isCurrent }) => {
-  const activeClass = isCurrent ? classes.isActive : null;
+const Cell = ({ day, isCurrent, onClick }) => {
+  const dayClass = isCurrent ? classes.dayActive : classes.day;
   return (
-    <td className={activeClass}>
-      <h4>{day}</h4>
+    <td onClick={onClick}>
+      <h4 className={dayClass}>{day}</h4>
     </td>
   );
 };
