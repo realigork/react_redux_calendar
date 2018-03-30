@@ -17,3 +17,21 @@
   flex: 1;
   color: #555;
 }
+
+.reminderYellow {
+  background: #eaf236;
+}
+
+.reminderGreen {
+  background: #36f252;
+}
+
+.reminderBlue {
+  background: #2b82e5;
+  color: #fff;
+}
+
+.reminderRed {
+  background: #e52b2b;
+  color: #fff;
+}

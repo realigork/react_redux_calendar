@@ -7,3 +7,52 @@
   padding: 0 0 10px 0;
   margin: 0 0 20px 0;
 }
+
+.fieldRow {
+  display: flex;
+}
+
+.fieldLabel {
+  flex: 1;
+}
+
+.fieldItem {
+  flex: 4;
+}
+
+.reminderColorList {
+  display: flex;
+}
+
+.reminderColor {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #fff;
+  transition: 200ms;
+}
+
+.reminderColor:hover {
+  border-color: #555;
+}
+
+.reminderYellow {
+  composes: reminderColor;
+  background: #eaf236;
+}
+
+.reminderGreen {
+  composes: reminderColor;
+  background: #36f252;
+}
+
+.reminderBlue {
+  composes: reminderColor;
+  background: #2b82e5;
+  color: #fff;
+}
+
+.reminderRed {
+  composes: reminderColor;
+  background: #e52b2b;
+  color: #fff;
+}
