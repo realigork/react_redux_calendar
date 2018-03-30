@@ -1,6 +1,12 @@
 th, td {
   border: 1px solid #eee;
-  padding: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+th {
+  padding: 5px;
+  font-size: 14px;
 }
 
 .calendar {

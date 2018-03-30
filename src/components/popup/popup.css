@@ -1,0 +1,11 @@
+.popup {
+  width: 450px;
+  padding: 20px;
+  background: #fff;
+  position: absolute;
+  left: 50%;
+  margin-left: -225px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+}

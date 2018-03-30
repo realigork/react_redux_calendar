@@ -1,6 +1,15 @@
+.cellInactive {
+  background: rgba(0,0,0,0.02);
+}
+
+.cellInactive * {
+  display: none;
+}
+
 .day {
   color: #888;
   font-size: 16px;
+  padding: 10px;
 }
 
 .dayActive {

@@ -1,0 +1,20 @@
+.reminder {
+  display: flex;
+  padding: 3px;
+  border: 1px solid #ccc;
+  background: #eee;
+  color: #555;
+  font-size: 14px;
+}
+
+.text {
+  flex: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.startTime {
+  flex: 1;
+  color: #555;
+}
