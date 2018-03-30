@@ -32,3 +32,35 @@
   margin: -15px 0 0 -15px;
   z-index: -1;
 }
+
+.reminderBtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border: 1px solid #eee;
+  transition: 200ms ease-out;
+  opacity: 0;
+}
+
+.reminderIcon {
+  display: block;
+  width: 16px;
+  margin: 4px auto;
+}
+
+.reminderIcon svg {
+  fill: tomato;
+  width: 16px;
+}
+
+.cell:hover .reminderBtn {
+  opacity: 1;
+}
+
+.reminderBtn:hover {
+  border-color: tomato;
+  cursor: pointer;
+}
