@@ -46,7 +46,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "mocha --compilers js:babel-core/register '+(test|src)/**/*_specs.js'"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -91,6 +91,8 @@
     "extends": "react-app"
   },
   "devDependencies": {
-    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "chai": "^4.1.2",
+    "mocha": "^5.0.5"
   }
 }
