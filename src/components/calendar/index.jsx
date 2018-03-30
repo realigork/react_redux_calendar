@@ -23,6 +23,7 @@ class Calendar extends Component {
     this.renderWeekdays = this.renderWeekdays.bind(this);
     this.renderDays = this.renderDays.bind(this);
     this.renderDaysRow = this.renderDaysRow.bind(this);
+    this.onCellClickHandler = this.onCellClickHandler.bind(this);
   }
 
   componentWillMount() {
@@ -37,6 +38,10 @@ class Calendar extends Component {
     });
   }
 
+  onCellClickHandler(index) {
+    console.log(index)
+  }
+
   renderWeekdays() {
     return weekdays.map((day) => {
       return <th key={day}><h3>{day}</h3></th>;
@@ -45,7 +50,15 @@ class Calendar extends Component {
 
   renderDays(row) {
     return row.map((item, index) => {
-      return <Cell key={item.day} day={item.day} isCurrent={item.isCurrent} />
+      const key = `${index}${item.day}`;
+      return (
+        <Cell
+          key={key}
+          day={item.day}
+          isCurrent={item.isCurrent}
+          onClick={(e) => { this.onCellClickHandler(e); }}
+        />
+      )
     });
   }
 
