@@ -25,7 +25,6 @@ import {
 import classes from './calendar.css';
 
 
-
 class Calendar extends Component {
   constructor(props) {
     super(props);
@@ -81,7 +80,6 @@ class Calendar extends Component {
       const reminder = Object.assign({}, newState.reminderForm);
       reminder.id = reminders.length;
       reminders.push(reminder);
-      newState.reminders = reminders;
       this.setState({ reminders });
     }
   }
@@ -131,7 +129,8 @@ class Calendar extends Component {
     const reminders = newState.reminders.slice(0);
     const reminder = getReminderById(id, reminders);
     let reminderForm = Object.assign({}, newState.reminderForm);
-    reminderForm = reminder;
+    reminderForm = reminder[0];
+    reminderForm.editing = true;
     newState.reminderForm = reminderForm;
     newState.showPopup = true;
     this.setState(newState);
@@ -181,10 +180,12 @@ class Calendar extends Component {
         <Popup>
           <ReminderForm
             day={this.state.reminderForm.day}
+            isEditing={this.state.reminderForm.editing}
             onChange={this.onReminderFormInputChange}
             onSubmit={this.onReminderFormSubmit}
             onColorSelect={this.onReminderFormColorSelect}
             selectedColor={this.state.reminderForm.color}
+            close={this.onClosePopup}
           />
         </Popup>
       </PopupWrapper>
