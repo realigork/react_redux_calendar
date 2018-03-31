@@ -69,7 +69,6 @@ const Cell = ({
             </g>
           </svg>
         </span>
-
       </div>
     </td>
   );
