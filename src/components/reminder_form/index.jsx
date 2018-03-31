@@ -63,7 +63,7 @@ const ReminderForm = (props) => {
             id="start"
             type="select"
             onChange={onChange}
-            selectData={generateDayHours()}
+            data={generateDayHours()}
             selected={formData.start}
           />
         </Fieldset>
@@ -73,7 +73,7 @@ const ReminderForm = (props) => {
             id="end"
             type="select"
             onChange={onChange}
-            selectData={generateDayHours()}
+            data={generateDayHours()}
             selected={formData.end}
           />
         </Fieldset>
@@ -102,7 +102,7 @@ const ReminderForm = (props) => {
             type="text"
             id="text"
             onChange={onChange}
-            inputData={{value: formData.text}}
+            data={{value: formData.text}}
           />
         </Fieldset>
 

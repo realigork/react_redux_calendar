@@ -3,19 +3,18 @@ import React from 'react';
 import Option from './option';
 
 
-const Input = ({ type, id, onChange, inputData, selectData, selected }) => {
+const Input = ({ type, id, onChange, data, selected }) => {
   let input = null;
   switch(type) {
     case ('text'):
       return (
-        <input id={id} type={type} onChange={onChange} value={inputData.value} />
+        <input id={id} type={type} onChange={onChange} value={data.value} />
       );
 
     case ('select'):
-      console.log(selectData);
       return (
         <select id={id} onChange={onChange} defaultValue={selected}>
-          {selectData.map((option) => {
+          {data.map((option) => {
             return (
               <Option
                 key={option}
