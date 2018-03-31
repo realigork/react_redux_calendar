@@ -26,6 +26,8 @@ import {
   sortDayReminders
 } from '../../utils/date';
 
+import { validateReminderForm } from '../../utils/validation';
+
 import classes from './calendar.css';
 
 
@@ -60,7 +62,7 @@ class Calendar extends Component {
       details: { ...dateObj },
       reminderForm: REMINDER_FORM_DEFAULT_DATA,
       reminders: [],
-      reminderDay: -1,
+      errors: [],
       showPopup: false,
       days
     });
@@ -115,8 +117,17 @@ class Calendar extends Component {
     const id = e.target.id;
     const newState = {...this.state};
     const reminderForm = Object.assign({}, newState.reminderForm);
+    newState.errors = [];
     reminderForm[id] = value;
-    this.setState({ reminderForm });
+
+    const validated = validateReminderForm(reminderForm);
+    if (validated.length) {
+      newState.errors = validated;
+    }
+
+    newState.reminderForm = reminderForm;
+
+    this.setState(newState);
   }
 
   onReminderFormColorSelect(i) {
@@ -209,6 +220,7 @@ class Calendar extends Component {
       <PopupWrapper onClick={this.onClosePopup}>
         <Popup>
           <ReminderForm
+            errors={this.state.errors}
             formData={reminderForm}
             selectedColor={reminderForm.color}
             onUpdate={(e) => { this.onUpdateReminder(e, reminderForm.id) }}

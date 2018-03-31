@@ -1,11 +1,30 @@
+.field {
+
+}
+
+.fieldError {
+  background: #ffe1db;
+}
+
 .fieldRow {
   display: flex;
 }
 
 .fieldLabel {
   flex: 1;
+  color: #555;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
 .fieldItem {
   flex: 4;
+}
+
+.error {
+  color: tomato;
+  font-size: 12px;
+  display: inline-block;
+  margin-left: 5px
 }

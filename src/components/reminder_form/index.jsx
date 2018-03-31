@@ -9,6 +9,7 @@ import classes from './reminder_form.css';
 
 const ReminderForm = (props) => {
   const {
+    errors,
     formData,
     onChange,
     onSubmit,
@@ -58,7 +59,7 @@ const ReminderForm = (props) => {
       </div>
 
       <form>
-        <Fieldset label="Start:">
+        <Fieldset label="start" errors={errors}>
           <Input
             id="start"
             type="select"
@@ -68,7 +69,7 @@ const ReminderForm = (props) => {
           />
         </Fieldset>
 
-        <Fieldset label="End:">
+        <Fieldset label="end" errors={errors}>
           <Input
             id="end"
             type="select"
@@ -78,7 +79,7 @@ const ReminderForm = (props) => {
           />
         </Fieldset>
 
-        <Fieldset label="Colour:">
+        <Fieldset label="colour" errors={errors}>
           <ul className={classes.reminderColorList}>
             {REMINDER_COLORS.map((style, index) => {
               const colorClass = selectedColor && selectedColor.id === style.id ?
@@ -97,7 +98,7 @@ const ReminderForm = (props) => {
           </ul>
         </Fieldset>
 
-        <Fieldset label="Text:">
+        <Fieldset label="text" errors={errors}>
           <Input
             type="text"
             id="text"
