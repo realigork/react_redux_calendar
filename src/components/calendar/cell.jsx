@@ -8,8 +8,6 @@ const Cell = ({
   isCurrent,
   onClick,
   reminders,
-  remindersLength,
-  reminderFirstIndex,
   onReminderClick
 }) => {
   let cellClass = classes.cell;
@@ -20,7 +18,7 @@ const Cell = ({
   const dayClass = isCurrent ? classes.dayActive : classes.day;
 
   let reminderList = null;
-  if (reminders && reminders.length || reminders !== null) {
+  if (reminders && (reminders.length || reminders !== null)) {
     reminderList = reminders.map((item, index) => {
       return (
         <Reminder

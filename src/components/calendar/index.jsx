@@ -147,15 +147,9 @@ class Calendar extends Component {
     return row.map((item, index) => {
       const key = `${index}${item.day}`;
       const reminders = this.getReminderByDay(item.day);
-      let reminderFirstIndex = 0;
-      let remindersTotal = 0;
-      let reminderItem = null;
-
-      if (reminders && (reminders != null || reminders.length)) {
-        reminderItem = reminders;
-        reminderFirstIndex = this.state.reminders.indexOf(reminders[0]);
-        remindersTotal = reminders.length;
-      }
+      const reminderItem = (reminders && (reminders != null || reminders.length)) ?
+        reminders :
+        null;
 
       return (
         <Cell
@@ -163,8 +157,6 @@ class Calendar extends Component {
           day={item.day}
           isCurrent={item.isCurrent}
           reminders={reminderItem}
-          reminderFirstIndex={reminderFirstIndex}
-          remindersLength={remindersTotal}
           onClick={() => { this.onOpenPopup(item.day); }}
           onReminderClick={this.onReminderClickHandler}
         />
