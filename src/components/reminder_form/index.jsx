@@ -6,8 +6,7 @@ import classes from './reminder_form.css';
 
 const ReminderForm = (props) => {
   const {
-    day,
-    isEditing,
+    formData,
     onChange,
     onSubmit,
     onUpdate,
@@ -18,7 +17,7 @@ const ReminderForm = (props) => {
   } = props;
 
   let controls = null;
-  if (isEditing) {
+  if (formData.editing) {
     controls = (
       <div className="btn-group">
         <button className={classes.submitBtn} onClick={onUpdate}>
@@ -40,7 +39,7 @@ const ReminderForm = (props) => {
   return (
     <div className={classes.reminderForm}>
       <div className={classes.reminderFormHeader}>
-        <h3 className={classes.day}>Day: {day}</h3>
+        <h3 className={classes.day}>Day: {formData.day}</h3>
         <span className={classes.reminderCloseBtn} onClick={close}>
           <svg viewBox="0 0 64 64">
             <g>

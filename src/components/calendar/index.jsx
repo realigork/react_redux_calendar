@@ -91,8 +91,11 @@ class Calendar extends Component {
 
   onOpenPopup(day) {
     const newState = {...this.state};
+    const reminders = newState.reminders.slice(0);
     const reminderForm = Object.assign({}, newState.reminderForm);
     reminderForm.day = day;
+    reminderForm.id = reminders.length;
+
     newState.reminderForm = reminderForm;
     newState.showPopup = true;
     this.setState(newState);
@@ -200,18 +203,18 @@ class Calendar extends Component {
   }
 
   renderReminderForm() {
+    const { reminderForm } = this.state;
     return (
       <PopupWrapper onClick={this.onClosePopup}>
         <Popup>
           <ReminderForm
-            day={this.state.reminderForm.day}
-            isEditing={this.state.reminderForm.editing}
+            formData={reminderForm}
+            selectedColor={reminderForm.color}
+            onUpdate={(e) => { this.onUpdateReminder(e, reminderForm.id) }}
+            onRemove={(e) => { this.onRemoveReminder(e, reminderForm.id) }}
             onChange={this.onReminderFormInputChange}
             onSubmit={this.onReminderFormSubmit}
-            onUpdate={(e) => { this.onUpdateReminder(e, this.state.reminderForm.id) }}
-            onRemove={(e) => { this.onRemoveReminder(e, this.state.reminderForm.id) }}
             onColorSelect={this.onReminderFormColorSelect}
-            selectedColor={this.state.reminderForm.color}
             close={this.onClosePopup}
           />
         </Popup>
@@ -220,8 +223,6 @@ class Calendar extends Component {
   }
 
   render() {
-    // console.log(this.state.reminderForm);
-    console.log(this.state.reminders);
     const { monthName, year, day } = this.state.details;
     const caption = `${monthName}, ${year}`;
     const renderWeekdays = this.renderWeekdays();
