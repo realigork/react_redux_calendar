@@ -12,6 +12,7 @@ import {
   getReminderById,
   getReminderIndexById,
   removeReminderByIndex,
+  updateReminderByIndex
 } from '../../utils/reminder';
 
 import {
@@ -45,6 +46,7 @@ class Calendar extends Component {
     this.onReminderClickHandler = this.onReminderClickHandler.bind(this);
     this.onReminderFormColorSelect = this.onReminderFormColorSelect.bind(this);
     this.onRemoveReminder = this.onRemoveReminder.bind(this);
+    this.onUpdateReminder = this.onUpdateReminder.bind(this);
   }
 
   componentWillMount() {
@@ -110,8 +112,7 @@ class Calendar extends Component {
     const newState = {...this.state};
     const reminderForm = Object.assign({}, newState.reminderForm);
     reminderForm[id] = value;
-    newState.reminderForm = reminderForm;
-    this.setState({ reminderForm: newState.reminderForm });
+    this.setState({ reminderForm });
   }
 
   onReminderFormColorSelect(i) {
@@ -134,6 +135,17 @@ class Calendar extends Component {
     const index = getReminderIndexById(id, reminders);
     const removed = removeReminderByIndex(index, reminders);
     this.setState({ reminders: removed });
+    setTimeout(this.onClosePopup, 0);
+  }
+
+  onUpdateReminder(event, id) {
+    event.preventDefault();
+    const newState = {...this.state};
+    const reminders = newState.reminders.slice(0);
+    const reminderForm = Object.assign({}, newState.reminderForm);
+    const index = getReminderIndexById(id, reminders);
+    const updated = updateReminderByIndex(index, reminders, reminderForm);
+    this.setState({ reminders: updated });
     setTimeout(this.onClosePopup, 0);
   }
 
@@ -196,8 +208,8 @@ class Calendar extends Component {
             isEditing={this.state.reminderForm.editing}
             onChange={this.onReminderFormInputChange}
             onSubmit={this.onReminderFormSubmit}
-            onUpdate={this.onReminderFormSubmit}
-            onRemove={(event) => { this.onRemoveReminder(event, this.state.reminderForm.id) }}
+            onUpdate={(e) => { this.onUpdateReminder(e, this.state.reminderForm.id) }}
+            onRemove={(e) => { this.onRemoveReminder(e, this.state.reminderForm.id) }}
             onColorSelect={this.onReminderFormColorSelect}
             selectedColor={this.state.reminderForm.color}
             close={this.onClosePopup}

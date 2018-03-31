@@ -37,3 +37,12 @@ export const removeReminderByIndex = (index, reminders) => {
     ...array.slice(index+1,)
   ]
 };
+
+export const updateReminderByIndex = (index, reminders, updated) => {
+  const array = reminders.slice(0);
+  return [
+    ...array.slice(0, index),
+    updated,
+    ...array.slice(index+1,)
+  ]
+};
