@@ -62,3 +62,19 @@ export const getDays = (maxDays, currentDay, firstWeekdayIndex) => {
 
   return days;
 };
+
+export const generateDayHours = () => {
+  const start = 0;
+  const end = 23;
+  const array = [];
+  for (let i = start, l = end; i <= l; i++) {
+    let trailing = '';
+    if (i < 10) {
+      array.push(`0${i}:00`);
+    } else {
+      array.push(`${i}:00`);
+    }
+  }
+
+  return array;
+}

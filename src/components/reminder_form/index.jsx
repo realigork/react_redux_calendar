@@ -1,6 +1,9 @@
 import React from 'react';
 
+import Input from '../UI/Input';
+import Fieldset from '../UI/Form/Fieldset';
 import { REMINDER_COLORS } from '../../utils/reminder';
+import { generateDayHours } from '../../utils/date';
 
 import classes from './reminder_form.css';
 
@@ -55,86 +58,57 @@ const ReminderForm = (props) => {
       </div>
 
       <form>
-        <fieldset>
-          <label className={classes.fieldRow}>
-            <span className={classes.fieldLabel}>Start time:</span>
-            <div className={classes.fieldItem}>
-              <select id="start" onChange={onChange}>
-                <option>09:00</option>
-                <option>10:00</option>
-                <option>11:00</option>
-                <option>12:00</option>
-                <option>13:00</option>
-                <option>14:00</option>
-                <option>15:00</option>
-                <option>16:00</option>
-                <option>17:00</option>
-                <option>18:00</option>
-              </select>
-            </div>
-          </label>
-        </fieldset>
+        <Fieldset label="Start:">
+          <Input
+            id="start"
+            type="select"
+            onChange={onChange}
+            selectData={generateDayHours()}
+            selected={formData.start}
+          />
+        </Fieldset>
 
-        <fieldset>
-          <label className={classes.fieldRow}>
-            <span className={classes.fieldLabel}>End time:</span>
-            <div className={classes.fieldItem}>
-              <select id="end" onChange={onChange}>
-                <option>10:00</option>
-                <option>11:00</option>
-                <option>12:00</option>
-                <option>13:00</option>
-                <option>14:00</option>
-                <option>15:00</option>
-                <option>16:00</option>
-                <option>17:00</option>
-                <option>18:00</option>
-              </select>
-            </div>
-          </label>
-        </fieldset>
+        <Fieldset label="End:">
+          <Input
+            id="end"
+            type="select"
+            onChange={onChange}
+            selectData={generateDayHours()}
+            selected={formData.end}
+          />
+        </Fieldset>
 
-        <fieldset>
-          <label className={classes.fieldRow}>
-            <span className={classes.fieldLabel}>Colour:</span>
-            <div className={classes.fieldItem}>
-              <ul className={classes.reminderColorList}>
-                {REMINDER_COLORS.map((style, index) => {
-                  const colorClass = selectedColor && selectedColor.id === style.id ?
-                    classes.reminderColorSelected :
-                    classes.reminderColor;
+        <Fieldset label="Colour:">
+          <ul className={classes.reminderColorList}>
+            {REMINDER_COLORS.map((style, index) => {
+              const colorClass = selectedColor && selectedColor.id === style.id ?
+                classes.reminderColorSelected :
+                classes.reminderColor;
 
-                  return (
-                    <li
-                      key={style.id}
-                      className={colorClass}
-                      style={style}
-                      onClick={() => { onColorSelect(index); }}
-                    />
-                  );
-                })}
-              </ul>
-            </div>
-          </label>
-        </fieldset>
+              return (
+                <li
+                  key={style.id}
+                  className={colorClass}
+                  style={style}
+                  onClick={() => { onColorSelect(index); }}
+                />
+              );
+            })}
+          </ul>
+        </Fieldset>
 
-        <fieldset>
-          <label className={classes.fieldRow}>
-            <span className={classes.fieldLabel}>Text:</span>
-            <div className={classes.fieldItem}>
-              <input type="text" id="text" onChange={onChange} />
-            </div>
-          </label>
-        </fieldset>
+        <Fieldset label="Text:">
+          <Input
+            type="text"
+            id="text"
+            onChange={onChange}
+            inputData={{value: formData.text}}
+          />
+        </Fieldset>
 
-        <fieldset>
-          <label className={classes.fieldRow}>
-            <span className={classes.fieldLabel}></span>
-            <div className={classes.fieldItem}>
-              {controls}
-            </div>
-          </label>
-        </fieldset>
+        <Fieldset>
+          {controls}
+        </Fieldset>
       </form>
     </div>
   );
