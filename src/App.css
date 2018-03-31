@@ -2,3 +2,13 @@
   width: 960px;
   margin: 0 auto;
 }
+
+:global .btn-alt {
+  border-color: #fff;
+  color: #888;
+}
+
+:global .btn-alt:hover {
+  border-color: tomato;
+  color: tomato;
+}

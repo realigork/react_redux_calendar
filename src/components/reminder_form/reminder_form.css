@@ -2,22 +2,27 @@
 
 }
 
-.day {
+.reminderFormHeader {
+  display: flex;
   border-bottom: 1px solid #eee;
   padding: 0 0 10px 0;
   margin: 0 0 20px 0;
 }
 
-.fieldRow {
-  display: flex;
-}
-
-.fieldLabel {
-  flex: 1;
-}
-
-.fieldItem {
+.day {
   flex: 4;
+}
+
+.reminderCloseBtn {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reminderCloseBtn svg {
+  height: 14px;
+  margin-top: 5px;
+  fill: #aaa;
 }
 
 .reminderColorList {

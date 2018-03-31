@@ -1,0 +1,11 @@
+.fieldRow {
+  display: flex;
+}
+
+.fieldLabel {
+  flex: 1;
+}
+
+.fieldItem {
+  flex: 4;
+}

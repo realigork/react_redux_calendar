@@ -62,3 +62,41 @@ export const getDays = (maxDays, currentDay, firstWeekdayIndex) => {
 
   return days;
 };
+
+export const generateDayHours = () => {
+  const start = 0;
+  const end = 23;
+  const array = [];
+  for (let i = start, l = end; i <= l; i++) {
+    let trailing = '';
+    if (i < 10) {
+      array.push(`0${i}:00`);
+    } else {
+      array.push(`${i}:00`);
+    }
+  }
+
+  return array;
+}
+
+export const sortDayReminders = (reminders, type) => {
+  const array = reminders.slice(0);
+  switch(type) {
+    case ('asc'):
+      return array.sort((a, b) => {
+        return parseInt(a.start) > parseInt(b.start);
+      });
+
+    case ('desc'):
+      return array.sort((a, b) => {
+        return parseInt(a.start) < parseInt(b.start);
+      });
+
+    default:
+      return array.sort((a, b) => {
+        return parseInt(a.start) > parseInt(b.start);
+      });
+  }
+
+  return array;
+};

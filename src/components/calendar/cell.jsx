@@ -3,7 +3,13 @@ import Reminder from './reminder';
 
 import classes from './cell.css';
 
-const Cell = ({ day, isCurrent, onClick, reminders }) => {
+const Cell = ({
+  day,
+  isCurrent,
+  onClick,
+  reminders,
+  onReminderClick
+}) => {
   let cellClass = classes.cell;
   if (day === '') {
     cellClass = classes.cellInactive;
@@ -12,10 +18,16 @@ const Cell = ({ day, isCurrent, onClick, reminders }) => {
   const dayClass = isCurrent ? classes.dayActive : classes.day;
 
   let reminderList = null;
-  if (reminders && reminders.length || reminders !== null) {
-    reminderList = reminders.map((item) => {
-      const key = `${item.day}-${item.start}`;
-      return <Reminder key={key} {...item} />;
+  if (reminders && (reminders.length || reminders !== null)) {
+    reminderList = reminders.map((item, index) => {
+      return (
+        <Reminder
+          key={item.id}
+          id={item.id}
+          onClick={() => { onReminderClick(item.id); }}
+          {...item}
+        />
+      );
     });
   }
 
