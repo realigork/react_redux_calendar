@@ -78,3 +78,25 @@ export const generateDayHours = () => {
 
   return array;
 }
+
+export const sortDayReminders = (reminders, type) => {
+  const array = reminders.slice(0);
+  switch(type) {
+    case ('asc'):
+      return array.sort((a, b) => {
+        return parseInt(a.start) > parseInt(b.start);
+      });
+
+    case ('desc'):
+      return array.sort((a, b) => {
+        return parseInt(a.start) < parseInt(b.start);
+      });
+
+    default:
+      return array.sort((a, b) => {
+        return parseInt(a.start) > parseInt(b.start);
+      });
+  }
+
+  return array;
+};

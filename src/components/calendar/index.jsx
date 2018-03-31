@@ -22,7 +22,8 @@ import {
   getCurrentDateObj,
   getFirstDayIndex,
   getDays,
-  getMonthTotal
+  getMonthTotal,
+  sortDayReminders
 } from '../../utils/date';
 
 import classes from './calendar.css';
@@ -174,8 +175,8 @@ class Calendar extends Component {
     return row.map((item, index) => {
       const key = `${index}${item.day}`;
       const reminders = this.getReminderByDay(item.day);
-      const reminderItem = (reminders && (reminders != null || reminders.length)) ?
-        reminders :
+      const dayReminders = (reminders && (reminders != null || reminders.length)) ?
+        sortDayReminders(reminders) :
         null;
 
       return (
@@ -183,7 +184,7 @@ class Calendar extends Component {
           key={key}
           day={item.day}
           isCurrent={item.isCurrent}
-          reminders={reminderItem}
+          reminders={dayReminders}
           onClick={() => { this.onOpenPopup(item.day); }}
           onReminderClick={this.onReminderClickHandler}
         />
