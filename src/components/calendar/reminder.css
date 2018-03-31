@@ -1,12 +1,13 @@
 .reminder {
   display: flex;
-  padding: 3px;
+  padding: 0 3px;
   color: #555;
-  font-size: 14px;
+  font-size: 12px;
+  line-height: 1.8;
 }
 
 .text {
-  flex: 2;
+  flex: 3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

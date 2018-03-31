@@ -46,25 +46,3 @@
   border-color: #555;
   cursor: default;
 }
-
-.reminderYellow {
-  composes: reminderColor;
-  background: #eaf236;
-}
-
-.reminderGreen {
-  composes: reminderColor;
-  background: #36f252;
-}
-
-.reminderBlue {
-  composes: reminderColor;
-  background: #2b82e5;
-  color: #fff;
-}
-
-.reminderRed {
-  composes: reminderColor;
-  background: #e52b2b;
-  color: #fff;
-}

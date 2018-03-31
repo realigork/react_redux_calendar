@@ -6,7 +6,10 @@ import PopupWrapper from '../../hoc/popupWrapper';
 import Popup from '../popup';
 import ReminderForm from '../reminder_form';
 
-import { reminderColors } from '../../utils/reminder';
+import {
+  REMINDER_COLORS,
+  REMINDER_FORM_DEFAULT_DATA
+} from '../../utils/reminder';
 
 import {
   weekdays,
@@ -19,6 +22,8 @@ import {
 } from '../../utils/date';
 
 import classes from './calendar.css';
+
+
 
 class Calendar extends Component {
   constructor(props) {
@@ -47,13 +52,7 @@ class Calendar extends Component {
     const days = getDays(totalDays, day, firstDayIndex);
     this.setState({
       details: { ...dateObj },
-      reminderForm: {
-        day: -1,
-        start: '09:00',
-        end: '10:00',
-        text: 'Default reminder',
-        color: {}
-      },
+      reminderForm: REMINDER_FORM_DEFAULT_DATA,
       reminders: [],
       reminderDay: -1,
       showPopup: false,
@@ -97,8 +96,7 @@ class Calendar extends Component {
   onClosePopup() {
     const newState = {...this.state};
     const reminderForm = Object.assign({}, newState.reminderForm);
-    reminderForm.day = -1;
-    newState.reminderForm = reminderForm;
+    newState.reminderForm = REMINDER_FORM_DEFAULT_DATA;
     newState.showPopup = false;
     this.setState(newState);
   }
@@ -116,7 +114,7 @@ class Calendar extends Component {
   onReminderFormColorSelect(i) {
     const newState = {...this.state};
     const reminderForm = Object.assign({}, newState.reminderForm);
-    reminderForm.color = reminderColors[i];
+    reminderForm.color = REMINDER_COLORS[i];
     this.setState({ reminderForm });
   }
 

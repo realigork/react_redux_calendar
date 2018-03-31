@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { reminderColors } from '../../utils/reminder';
+import { REMINDER_COLORS } from '../../utils/reminder';
 
 import classes from './reminder_form.css';
 
@@ -55,7 +55,7 @@ const ReminderForm = (props) => {
             <span className={classes.fieldLabel}>Colour:</span>
             <div className={classes.fieldItem}>
               <ul className={classes.reminderColorList}>
-                {reminderColors.map((style, index) => {
+                {REMINDER_COLORS.map((style, index) => {
                   const colorClass = selectedColor && selectedColor.id === style.id ?
                     classes.reminderColorSelected :
                     classes.reminderColor;
