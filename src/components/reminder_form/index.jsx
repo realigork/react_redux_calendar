@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { reminderColors } from '../../utils/reminder';
+
 import classes from './reminder_form.css';
 
-const ReminderForm = ({ day, onChange, onSubmit }) => {
-
+const ReminderForm = (props) => {
+  const { day, onChange, onSubmit, onColorSelect, selectedColor } = props;
   return (
     <div className={classes.reminderForm}>
       <h3 className={classes.day}>Day: {day}</h3>
@@ -53,10 +55,20 @@ const ReminderForm = ({ day, onChange, onSubmit }) => {
             <span className={classes.fieldLabel}>Colour:</span>
             <div className={classes.fieldItem}>
               <ul className={classes.reminderColorList}>
-                <li className={classes.reminderYellow}></li>
-                <li className={classes.reminderGreen}></li>
-                <li className={classes.reminderBlue}></li>
-                <li className={classes.reminderRed}></li>
+                {reminderColors.map((style, index) => {
+                  const colorClass = selectedColor && selectedColor.id === style.id ?
+                    classes.reminderColorSelected :
+                    classes.reminderColor;
+
+                  return (
+                    <li
+                      key={style.id}
+                      className={colorClass}
+                      style={style}
+                      onClick={() => { onColorSelect(index); }}
+                    />
+                  );
+                })}
               </ul>
             </div>
           </label>
@@ -75,7 +87,9 @@ const ReminderForm = ({ day, onChange, onSubmit }) => {
           <label className={classes.fieldRow}>
             <span className={classes.fieldLabel}></span>
             <div className={classes.fieldItem}>
-              <button className={classes.submitBtn} onClick={onSubmit}>Add</button>
+              <button className={classes.submitBtn} onClick={onSubmit}>
+                Add
+              </button>
             </div>
           </label>
         </fieldset>
