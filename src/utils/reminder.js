@@ -24,3 +24,16 @@ export const getReminderById = (id, reminders) => {
     return item.id === id;
   });
 };
+
+export const getReminderIndexById = (id, reminders) => {
+  const array = reminders.slice(0);
+  return array.findIndex(item => item.id === id);
+};
+
+export const removeReminderByIndex = (index, reminders) => {
+  const array = reminders.slice(0);
+  return [
+    ...array.slice(0, index),
+    ...array.slice(index+1,)
+  ]
+};

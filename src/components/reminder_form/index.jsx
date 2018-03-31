@@ -24,7 +24,7 @@ const ReminderForm = (props) => {
         <button className={classes.submitBtn} onClick={onUpdate}>
           Update
         </button>
-        <button className="btn-alt" onClick={onUpdate}>
+        <button className="btn-alt" onClick={onRemove}>
           Remove
         </button>
       </div>
