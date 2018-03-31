@@ -9,10 +9,18 @@ export const REMINDER_COLORS = [
 ];
 
 export const REMINDER_FORM_DEFAULT_DATA = {
+  id: null,
   day: -1,
   start: '09:00',
   end: '10:00',
   text: 'Default reminder',
   editing: false,
   color: {}
+};
+
+export const getReminderById = (id, reminders) => {
+  const array = reminders.slice(0);
+  return array.filter((item) => {
+    return item.id === id;
+  });
 };

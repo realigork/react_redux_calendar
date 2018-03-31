@@ -8,7 +8,8 @@ import ReminderForm from '../reminder_form';
 
 import {
   REMINDER_COLORS,
-  REMINDER_FORM_DEFAULT_DATA
+  REMINDER_FORM_DEFAULT_DATA,
+  getReminderById
 } from '../../utils/reminder';
 
 import {
@@ -40,7 +41,7 @@ class Calendar extends Component {
     this.renderReminderForm = this.renderReminderForm.bind(this);
     this.onReminderFormInputChange = this.onReminderFormInputChange.bind(this);
     this.onReminderFormSubmit = this.onReminderFormSubmit.bind(this);
-    this.onReminderOpen = this.onReminderOpen.bind(this);
+    this.onReminderClickHandler = this.onReminderClickHandler.bind(this);
     this.onReminderFormColorSelect = this.onReminderFormColorSelect.bind(this);
   }
 
@@ -78,6 +79,7 @@ class Calendar extends Component {
       const newState = {...this.state};
       const reminders = newState.reminders.slice(0);
       const reminder = Object.assign({}, newState.reminderForm);
+      reminder.id = reminders.length;
       reminders.push(reminder);
       newState.reminders = reminders;
       this.setState({ reminders });
@@ -124,8 +126,15 @@ class Calendar extends Component {
     setTimeout(this.onClosePopup, 0);
   }
 
-  onReminderOpen() {
-
+  onReminderClickHandler(id) {
+    const newState = {...this.state};
+    const reminders = newState.reminders.slice(0);
+    const reminder = getReminderById(id, reminders);
+    let reminderForm = Object.assign({}, newState.reminderForm);
+    reminderForm = reminder;
+    newState.reminderForm = reminderForm;
+    newState.showPopup = true;
+    this.setState(newState);
   }
 
   renderWeekdays() {
@@ -138,9 +147,15 @@ class Calendar extends Component {
     return row.map((item, index) => {
       const key = `${index}${item.day}`;
       const reminders = this.getReminderByDay(item.day);
-      const reminderItem = reminders && (reminders != null || reminders.length) ?
-        reminders :
-        null;
+      let reminderFirstIndex = 0;
+      let remindersTotal = 0;
+      let reminderItem = null;
+
+      if (reminders && (reminders != null || reminders.length)) {
+        reminderItem = reminders;
+        reminderFirstIndex = this.state.reminders.indexOf(reminders[0]);
+        remindersTotal = reminders.length;
+      }
 
       return (
         <Cell
@@ -148,8 +163,10 @@ class Calendar extends Component {
           day={item.day}
           isCurrent={item.isCurrent}
           reminders={reminderItem}
+          reminderFirstIndex={reminderFirstIndex}
+          remindersLength={remindersTotal}
           onClick={() => { this.onOpenPopup(item.day); }}
-          openReminder={this.onReminderOpen}
+          onReminderClick={this.onReminderClickHandler}
         />
       )
     });
