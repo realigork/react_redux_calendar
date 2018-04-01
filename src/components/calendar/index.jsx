@@ -33,7 +33,6 @@ class Calendar extends Component {
     this.renderDaysRow = this.renderDaysRow.bind(this);
     this.renderReminderForm = this.renderReminderForm.bind(this);
     this.onReminderFormInputChange = this.onReminderFormInputChange.bind(this);
-    this.onUpdateReminder = this.onUpdateReminder.bind(this);
   }
 
   onReminderFormInputChange(e) {
@@ -100,7 +99,7 @@ class Calendar extends Component {
             errors={this.props.errors}
             formData={reminderForm}
             selectedColor={reminderForm.color}
-            onUpdate={(e) => { this.onUpdateReminder(e, reminderForm.id) }}
+            onUpdate={(e) => { this.props.onUpdateReminder(e, reminderForm.id) }}
             onRemove={(e) => { this.props.onRemoveReminder(e, reminderForm.id) }}
             onChange={this.onReminderFormInputChange}
             onSubmit={this.props.onAddReminder}
@@ -181,6 +180,10 @@ const mapDispatchToProps = dispatch => {
     onRemoveReminder: (e, id) => {
       e.preventDefault();
       dispatch(calendarActions.removeReminder(id));
+    },
+    onUpdateReminder: (e, id) => {
+      e.preventDefault();
+      dispatch(calendarActions.updateReminder(id));
     }
   }
 }

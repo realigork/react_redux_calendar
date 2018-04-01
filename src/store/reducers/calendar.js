@@ -33,6 +33,9 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  let reminders, reminder, reminderForm, errors, index;
+  let validated = [];
+
   switch(action.type) {
     case actions.ADD_REMINDER:
       return {
@@ -49,7 +52,7 @@ const reducer = (state = initialState, action) => {
       };
 
     case actions.EDIT_REMINDER:
-      const reminder = getReminderById(action.id, state.reminders);
+      reminder = getReminderById(action.id, state.reminders);
       return {
         ...state,
         showPopup: true,
@@ -60,8 +63,8 @@ const reducer = (state = initialState, action) => {
       };
 
     case actions.REMOVE_REMINDER:
-      const reminders = state.reminders.slice(0);
-      const index = reminders.findIndex(item => item.id === action.id);
+      reminders = state.reminders.slice(0);
+      index = reminders.findIndex(item => item.id === action.id);
 
       return {
         ...state,
@@ -74,8 +77,19 @@ const reducer = (state = initialState, action) => {
       };
 
     case actions.UPDATE_REMINDER:
+      reminders = state.reminders.slice(0);
+      index = reminders.findIndex(item => item.id === action.id);
+      console.log(state.reminderForm);
+
       return {
-        ...state
+        ...state,
+        reminders: [
+          ...state.reminders.slice(0, index),
+          {...state.reminderForm},
+          ...state.reminders.slice(index+1,)
+        ],
+        reminderForm: REMINDER_FORM_DEFAULT_DATA,
+        showPopup: false
       };
 
     case actions.SHOW_NEW_REMINDER_FORM:
@@ -97,11 +111,11 @@ const reducer = (state = initialState, action) => {
       }
 
     case actions.CHANGE_REMINDER_INPUT:
-      const reminderForm = Object.assign({}, state.reminderForm);
-      let errors = [];
+      reminderForm = Object.assign({}, state.reminderForm);
+      errors = [];
       reminderForm[action.id] = action.value;
 
-      const validated = validateReminderForm(reminderForm);
+      validated = validateReminderForm(reminderForm);
       if (validated.length) {
         errors = validated;
       }
