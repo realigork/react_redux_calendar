@@ -70,7 +70,7 @@ export const getDays = (year, month, currentDate) => {
       currentDate.day
     ) ?
       currentDate.day :
-      -1;
+      false;
 
     if (i < monthStart || i > maxDays) {
       // add leading or trailing cells
