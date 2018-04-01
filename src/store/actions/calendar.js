@@ -7,9 +7,10 @@ export const addReminder = () => {
   }
 };
 
-export const editReminder = () => {
+export const editReminder = (id) => {
   return {
-    type: actions.EDIT_REMINDER
+    type: actions.EDIT_REMINDER,
+    id
   }
 };
 

@@ -2,7 +2,8 @@ import * as actions from '../actions/actions';
 
 import {
   REMINDER_FORM_DEFAULT_DATA,
-  REMINDER_COLORS
+  REMINDER_COLORS,
+  getReminderById
 } from '../../utils/reminder';
 
 import {
@@ -48,8 +49,16 @@ const reducer = (state = initialState, action) => {
       };
 
     case actions.EDIT_REMINDER:
+      const reminder = getReminderById(action.id, state.reminders);
+      console.log(action.id);
+      console.log(state.reminders);
       return {
-        ...state
+        ...state,
+        showPopup: true,
+        reminderForm: {
+          ...reminder,
+          editing: true
+        }
       };
 
     case actions.UPDATE_REMINDER:

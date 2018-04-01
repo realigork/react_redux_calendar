@@ -10,8 +10,6 @@ import ReminderForm from '../reminder_form';
 import * as calendarActions from '../../store/actions/calendar';
 
 import {
-  REMINDER_FORM_DEFAULT_DATA,
-  getReminderById,
   getReminderIndexById,
   removeReminderByIndex,
   updateReminderByIndex,
@@ -20,12 +18,7 @@ import {
 
 import {
   weekdays,
-  monthsShort,
   splitDaysIntoWeeks,
-  getCurrentDateObj,
-  getFirstDayIndex,
-  getDays,
-  getMonthTotal,
   sortDayReminders
 } from '../../utils/date';
 
@@ -41,8 +34,6 @@ class Calendar extends Component {
     this.renderDaysRow = this.renderDaysRow.bind(this);
     this.renderReminderForm = this.renderReminderForm.bind(this);
     this.onReminderFormInputChange = this.onReminderFormInputChange.bind(this);
-    this.onReminderFormSubmit = this.onReminderFormSubmit.bind(this);
-    this.onReminderClickHandler = this.onReminderClickHandler.bind(this);
     this.onRemoveReminder = this.onRemoveReminder.bind(this);
     this.onUpdateReminder = this.onUpdateReminder.bind(this);
   }
@@ -51,11 +42,6 @@ class Calendar extends Component {
     const id = e.target.id;
     const value = e.target.value;
     this.props.onReminderInputChange(id, value);
-  }
-
-  onReminderFormSubmit(e) {
-    e.preventDefault();
-    this.props.onAddReminder();
   }
 
   onRemoveReminder(event, id) {
@@ -79,18 +65,6 @@ class Calendar extends Component {
     setTimeout(this.props.onCloseReminderForm, 0);
   }
 
-  onReminderClickHandler(id) {
-    const newState = {...this.state};
-    const reminders = newState.reminders.slice(0);
-    const reminder = getReminderById(id, reminders);
-    let reminderForm = Object.assign({}, newState.reminderForm);
-    reminderForm = reminder[0];
-    reminderForm.editing = true;
-    newState.reminderForm = reminderForm;
-    newState.showPopup = true;
-    this.setState(newState);
-  }
-
   renderWeekdays() {
     return weekdays.map((day) => {
       return <th key={day}><h3>{day}</h3></th>;
@@ -112,7 +86,7 @@ class Calendar extends Component {
           isCurrent={item.isCurrent}
           reminders={dayReminders}
           onClick={() => { this.props.onShowReminderForm(item.day); }}
-          onReminderClick={this.onReminderClickHandler}
+          onReminderClick={this.props.onEditReminder}
         />
       )
     });
@@ -141,7 +115,7 @@ class Calendar extends Component {
             onUpdate={(e) => { this.onUpdateReminder(e, reminderForm.id) }}
             onRemove={(e) => { this.onRemoveReminder(e, reminderForm.id) }}
             onChange={this.onReminderFormInputChange}
-            onSubmit={this.onReminderFormSubmit}
+            onSubmit={this.props.onAddReminder}
             onColorSelect={this.props.onSelectReminderColor}
             close={this.props.onCloseReminderForm}
           />
@@ -197,11 +171,25 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onShowReminderForm: (day) => dispatch(calendarActions.showNewReminderForm(day)),
-    onCloseReminderForm: () => dispatch(calendarActions.closeReminderForm()),
-    onReminderInputChange: (id, value) => dispatch(calendarActions.changeReminderInput(id, value)),
-    onSelectReminderColor: (i) => dispatch(calendarActions.selectReminderColor(i)),
-    onAddReminder: () => dispatch(calendarActions.addReminder())
+    onShowReminderForm: (day) => {
+      dispatch(calendarActions.showNewReminderForm(day));
+    },
+    onCloseReminderForm: () => {
+      dispatch(calendarActions.closeReminderForm());
+    },
+    onReminderInputChange: (id, value) => {
+      dispatch(calendarActions.changeReminderInput(id, value));
+    },
+    onSelectReminderColor: (i) => {
+      dispatch(calendarActions.selectReminderColor(i));
+    },
+    onAddReminder: (e) => {
+      e.preventDefault();
+      dispatch(calendarActions.addReminder());
+    },
+    onEditReminder: (id) => {
+      dispatch(calendarActions.editReminder(id));
+    }
   }
 }
 

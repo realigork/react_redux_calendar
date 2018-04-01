@@ -20,9 +20,11 @@ export const REMINDER_FORM_DEFAULT_DATA = {
 
 export const getReminderById = (id, reminders) => {
   const array = reminders.slice(0);
-  return array.filter((item) => {
+  const reminder = array.filter((item) => {
     return item.id === id;
   });
+
+  return reminder[0];
 };
 
 export const getReminderIndexById = (id, reminders) => {
