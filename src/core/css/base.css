@@ -52,7 +52,8 @@ button {
   display: inline-block;
   background: none;
   color: tomato;
-  border: 1px solid #eee;
+  text-transform: uppercase;
+  border: 1px solid tomato;
   padding: 10px 30px;
   margin: 10px 0;
   transition: 200ms;
@@ -61,13 +62,15 @@ button {
 button[disabled],
 button[disabled]:hover,
 button[disabled]:active {
+  background: none;
   color: #ccc;
   border-color: #f2f2f2;
   cursor: default;
 }
 
 button:hover {
-  border-color: tomato;
+  color: #fff;
+  background: tomato;
   cursor: pointer;
 }
 
@@ -80,4 +83,9 @@ th, td {
 th {
   padding: 5px;
   font-size: 14px;
+}
+
+input[type="text"] {
+  border: 1px solid #eee;
+  padding: 5px;
 }

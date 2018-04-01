@@ -12,6 +12,7 @@
 
 .color:hover {
   border-color: #555;
+  cursor: pointer;
 }
 
 .colorSelected {

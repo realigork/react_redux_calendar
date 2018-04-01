@@ -12,6 +12,7 @@
 
 .fieldLabel {
   flex: 1;
+  align-self: center;
   color: #555;
   font-size: 12px;
   font-weight: 500;
