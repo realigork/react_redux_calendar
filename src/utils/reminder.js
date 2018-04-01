@@ -10,6 +10,8 @@ export const REMINDER_COLORS = [
 
 export const REMINDER_FORM_DEFAULT_DATA = {
   id: null,
+  year: -1,
+  month: -1,
   day: -1,
   start: '00:00',
   end: '01:00',
@@ -44,12 +46,16 @@ export const updateReminderByIndex = (index, reminders, updated) => {
   ]
 };
 
-export const getReminderByDay = (reminders, day) => {
-  const dayReminders = reminders.slice(0);
+export const getReminderByDate = (reminders, date) => {
+  const array = reminders.slice(0);
   let reminder = null;
-  if (dayReminders.length) {
-    reminder = dayReminders.filter((item) => {
-      return item.day === day;
+  if (array.length) {
+    reminder = array.filter((item) => {
+      return (
+        item.year === date.year &&
+        item.month === date.month &&
+        item.day === date.day
+      );
     });
   }
 
