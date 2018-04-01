@@ -10,7 +10,6 @@ import ReminderForm from '../reminder_form';
 import * as calendarActions from '../../store/actions/calendar';
 
 import {
-  REMINDER_COLORS,
   REMINDER_FORM_DEFAULT_DATA,
   getReminderById,
   getReminderIndexById,
@@ -28,8 +27,6 @@ import {
   getMonthTotal,
   sortDayReminders
 } from '../../utils/date';
-
-import { validateReminderForm } from '../../utils/validation';
 
 import classes from './calendar.css';
 
@@ -81,10 +78,7 @@ class Calendar extends Component {
   }
 
   onReminderFormColorSelect(i) {
-    const newState = {...this.state};
-    const reminderForm = Object.assign({}, newState.reminderForm);
-    reminderForm.color = REMINDER_COLORS[i];
-    this.setState({ reminderForm });
+    this.props.onSelectReminderColor(i);
   }
 
   onReminderFormSubmit(e) {
@@ -234,7 +228,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onShowReminderForm: (day) => dispatch(calendarActions.showNewReminderForm(day)),
     onCloseReminderForm: () => dispatch(calendarActions.closeReminderForm()),
-    onReminderInputChange: (id, value) => dispatch(calendarActions.reminderInputChange(id, value))
+    onReminderInputChange: (id, value) => dispatch(calendarActions.changeReminderInput(id, value)),
+    onSelectReminderColor: (i) => dispatch(calendarActions.selectReminderColor(i))
   }
 }
 

@@ -2,6 +2,7 @@ import * as actions from '../actions/actions';
 
 import {
   REMINDER_FORM_DEFAULT_DATA,
+  REMINDER_COLORS
 } from '../../utils/reminder';
 
 import {
@@ -32,6 +33,21 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
+    case actions.ADD_REMINDER:
+      return {
+        ...state
+      };
+
+    case actions.EDIT_REMINDER:
+      return {
+        ...state
+      };
+
+    case actions.UPDATE_REMINDER:
+      return {
+        ...state
+      };
+
     case actions.SHOW_NEW_REMINDER_FORM:
       return {
         ...state,
@@ -50,7 +66,7 @@ const reducer = (state = initialState, action) => {
         showPopup: false
       }
 
-    case actions.REMINDER_INPUT_CHANGE:
+    case actions.CHANGE_REMINDER_INPUT:
       const reminderForm = Object.assign({}, state.reminderForm);
       let errors = [];
       reminderForm[action.id] = action.value;
@@ -64,6 +80,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         errors: [...errors],
         reminderForm: {...reminderForm}
+      }
+
+    case actions.SELECT_REMINDER_COLOR:
+      return {
+        ...state,
+        reminderForm: {
+          ...state.reminderForm,
+          color: REMINDER_COLORS[action.index]
+        }
       }
 
     default:
