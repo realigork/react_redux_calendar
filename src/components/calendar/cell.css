@@ -14,7 +14,7 @@
 
 .dayActive {
   composes: day;
-  color: #fff;
+  color: tomato;
   display: inline-block;
   font-weight: 500;
   position: relative;
@@ -22,14 +22,14 @@
 
 .dayActive:before {
   content: '';
-  width: 30px;
-  height: 30px;
-  background: tomato;
+  width: 24px;
+  height: 24px;
+  background: #fbe9e6;
   border-radius: 50%;
   position: absolute;
   top: 50%;
   left: 50%;
-  margin: -15px 0 0 -15px;
+  margin: -12px 0 0 -12px;
   z-index: -1;
 }
 
