@@ -14,7 +14,8 @@ import {
   getReminderById,
   getReminderIndexById,
   removeReminderByIndex,
-  updateReminderByIndex
+  updateReminderByIndex,
+  getReminderByDay
 } from '../../utils/reminder';
 
 import {
@@ -38,27 +39,13 @@ class Calendar extends Component {
     this.renderWeekdays = this.renderWeekdays.bind(this);
     this.renderDays = this.renderDays.bind(this);
     this.renderDaysRow = this.renderDaysRow.bind(this);
-    this.getReminderByDay = this.getReminderByDay.bind(this);
     this.addReminder = this.addReminder.bind(this);
     this.renderReminderForm = this.renderReminderForm.bind(this);
     this.onReminderFormInputChange = this.onReminderFormInputChange.bind(this);
     this.onReminderFormSubmit = this.onReminderFormSubmit.bind(this);
     this.onReminderClickHandler = this.onReminderClickHandler.bind(this);
-    this.onReminderFormColorSelect = this.onReminderFormColorSelect.bind(this);
     this.onRemoveReminder = this.onRemoveReminder.bind(this);
     this.onUpdateReminder = this.onUpdateReminder.bind(this);
-  }
-
-  getReminderByDay(day) {
-    const reminders = this.props.reminders.slice(0);
-    let reminder = null;
-    if (reminders.length) {
-      reminder = reminders.filter((item) => {
-        return item.day === day;
-      });
-    }
-
-    return reminder;
   }
 
   addReminder() {
@@ -75,10 +62,6 @@ class Calendar extends Component {
     const id = e.target.id;
     const value = e.target.value;
     this.props.onReminderInputChange(id, value);
-  }
-
-  onReminderFormColorSelect(i) {
-    this.props.onSelectReminderColor(i);
   }
 
   onReminderFormSubmit(e) {
@@ -129,7 +112,7 @@ class Calendar extends Component {
   renderDays(row) {
     return row.map((item, index) => {
       const key = `${index}${item.day}`;
-      const reminders = this.getReminderByDay(item.day);
+      const reminders = getReminderByDay(this.props.reminders, item.day);
       const dayReminders = (reminders && (reminders != null || reminders.length)) ?
         sortDayReminders(reminders) :
         null;
@@ -171,7 +154,7 @@ class Calendar extends Component {
             onRemove={(e) => { this.onRemoveReminder(e, reminderForm.id) }}
             onChange={this.onReminderFormInputChange}
             onSubmit={this.onReminderFormSubmit}
-            onColorSelect={this.onReminderFormColorSelect}
+            onColorSelect={this.props.onSelectReminderColor}
             close={this.props.onCloseReminderForm}
           />
         </Popup>

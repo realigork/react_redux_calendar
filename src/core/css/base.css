@@ -48,6 +48,7 @@ td {
 }
 
 button {
+  outline: none;
   display: inline-block;
   background: none;
   color: tomato;
@@ -55,6 +56,14 @@ button {
   padding: 10px 30px;
   margin: 10px 0;
   transition: 200ms;
+}
+
+button[disabled],
+button[disabled]:hover,
+button[disabled]:active {
+  color: #ccc;
+  border-color: #f2f2f2;
+  cursor: default;
 }
 
 button:hover {

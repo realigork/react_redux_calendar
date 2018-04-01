@@ -46,3 +46,15 @@ export const updateReminderByIndex = (index, reminders, updated) => {
     ...array.slice(index+1,)
   ]
 };
+
+export const getReminderByDay = (reminders, day) => {
+  const dayReminders = reminders.slice(0);
+  let reminder = null;
+  if (dayReminders.length) {
+    reminder = dayReminders.filter((item) => {
+      return item.day === day;
+    });
+  }
+
+  return reminder;
+};
