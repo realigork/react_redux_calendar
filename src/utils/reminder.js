@@ -27,11 +27,6 @@ export const getReminderById = (id, reminders) => {
   return reminder[0];
 };
 
-export const getReminderIndexById = (id, reminders) => {
-  const array = reminders.slice(0);
-  return array.findIndex(item => item.id === id);
-};
-
 export const removeReminderByIndex = (index, reminders) => {
   const array = reminders.slice(0);
   return [

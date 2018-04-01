@@ -20,6 +20,13 @@ export const updateReminder = () => {
   }
 };
 
+export const removeReminder = (id) => {
+  return {
+    type: actions.REMOVE_REMINDER,
+    id
+  }
+}
+
 export const changeReminderInput = (id, value) => {
   return {
     type: actions.CHANGE_REMINDER_INPUT,

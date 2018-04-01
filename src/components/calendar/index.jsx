@@ -10,7 +10,6 @@ import ReminderForm from '../reminder_form';
 import * as calendarActions from '../../store/actions/calendar';
 
 import {
-  getReminderIndexById,
   removeReminderByIndex,
   updateReminderByIndex,
   getReminderByDay
@@ -34,7 +33,6 @@ class Calendar extends Component {
     this.renderDaysRow = this.renderDaysRow.bind(this);
     this.renderReminderForm = this.renderReminderForm.bind(this);
     this.onReminderFormInputChange = this.onReminderFormInputChange.bind(this);
-    this.onRemoveReminder = this.onRemoveReminder.bind(this);
     this.onUpdateReminder = this.onUpdateReminder.bind(this);
   }
 
@@ -44,25 +42,15 @@ class Calendar extends Component {
     this.props.onReminderInputChange(id, value);
   }
 
-  onRemoveReminder(event, id) {
-    event.preventDefault();
-    const newState = {...this.state};
-    const reminders = newState.reminders.slice(0);
-    const index = getReminderIndexById(id, reminders);
-    const removed = removeReminderByIndex(index, reminders);
-    this.setState({ reminders: removed });
-    setTimeout(this.props.onCloseReminderForm, 0);
-  }
-
   onUpdateReminder(event, id) {
-    event.preventDefault();
-    const newState = {...this.state};
-    const reminders = newState.reminders.slice(0);
-    const reminderForm = Object.assign({}, newState.reminderForm);
-    const index = getReminderIndexById(id, reminders);
-    const updated = updateReminderByIndex(index, reminders, reminderForm);
-    this.setState({ reminders: updated });
-    setTimeout(this.props.onCloseReminderForm, 0);
+    // event.preventDefault();
+    // const newState = {...this.state};
+    // const reminders = newState.reminders.slice(0);
+    // const reminderForm = Object.assign({}, newState.reminderForm);
+    // const index = getReminderIndexById(id, reminders);
+    // const updated = updateReminderByIndex(index, reminders, reminderForm);
+    // this.setState({ reminders: updated });
+    // setTimeout(this.props.onCloseReminderForm, 0);
   }
 
   renderWeekdays() {
@@ -113,7 +101,7 @@ class Calendar extends Component {
             formData={reminderForm}
             selectedColor={reminderForm.color}
             onUpdate={(e) => { this.onUpdateReminder(e, reminderForm.id) }}
-            onRemove={(e) => { this.onRemoveReminder(e, reminderForm.id) }}
+            onRemove={(e) => { this.props.onRemoveReminder(e, reminderForm.id) }}
             onChange={this.onReminderFormInputChange}
             onSubmit={this.props.onAddReminder}
             onColorSelect={this.props.onSelectReminderColor}
@@ -189,6 +177,10 @@ const mapDispatchToProps = dispatch => {
     },
     onEditReminder: (id) => {
       dispatch(calendarActions.editReminder(id));
+    },
+    onRemoveReminder: (e, id) => {
+      e.preventDefault();
+      dispatch(calendarActions.removeReminder(id));
     }
   }
 }

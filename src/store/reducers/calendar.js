@@ -50,8 +50,6 @@ const reducer = (state = initialState, action) => {
 
     case actions.EDIT_REMINDER:
       const reminder = getReminderById(action.id, state.reminders);
-      console.log(action.id);
-      console.log(state.reminders);
       return {
         ...state,
         showPopup: true,
@@ -59,6 +57,20 @@ const reducer = (state = initialState, action) => {
           ...reminder,
           editing: true
         }
+      };
+
+    case actions.REMOVE_REMINDER:
+      const reminders = state.reminders.slice(0);
+      const index = reminders.findIndex(item => item.id === action.id);
+
+      return {
+        ...state,
+        reminders: [
+          ...state.reminders.slice(0, index),
+          ...state.reminders.slice(index+1,)
+        ],
+        reminderForm: REMINDER_FORM_DEFAULT_DATA,
+        showPopup: false
       };
 
     case actions.UPDATE_REMINDER:
