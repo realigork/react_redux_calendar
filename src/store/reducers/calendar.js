@@ -85,7 +85,6 @@ const reducer = (state = initialState, action) => {
     case actions.UPDATE_REMINDER:
       reminders = state.reminders.slice(0);
       index = reminders.findIndex(item => item.id === action.id);
-      console.log(state.reminderForm);
 
       return {
         ...state,
@@ -103,6 +102,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         reminderForm: {
           ...state.reminderForm,
+          year: state.details.year,
+          month: state.details.month,
           day: action.day,
           id: state.reminders.length
         },

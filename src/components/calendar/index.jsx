@@ -9,7 +9,7 @@ import ReminderForm from '../reminder_form';
 
 import * as calendarActions from '../../store/actions/calendar';
 
-import { getReminderByDay } from '../../utils/reminder';
+import { getReminderByDate } from '../../utils/reminder';
 
 import {
   weekdays,
@@ -46,7 +46,13 @@ class Calendar extends Component {
   renderDays(row) {
     return row.map((item, index) => {
       const key = `${index}${item.day}`;
-      const reminders = getReminderByDay(this.props.reminders, item.day);
+      const date = {
+        year: item.year,
+        month: item.month,
+        day: item.day
+      };
+
+      const reminders = getReminderByDate(this.props.reminders, date);
       const dayReminders = (reminders && (reminders != null || reminders.length)) ?
         sortDayReminders(reminders) :
         null;

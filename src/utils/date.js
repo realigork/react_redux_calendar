@@ -46,7 +46,6 @@ export const getMonthTotal = (year, month) => {
 };
 
 export const getDays = (year, month, currentDate) => {
-  console.log(year, month, currentDate);
   const maxDays = getMonthTotal(year, month);
   const firstWeekdayIndex = getFirstDayIndex(year, month);
 
@@ -74,9 +73,12 @@ export const getDays = (year, month, currentDate) => {
       -1;
 
     if (i < monthStart || i > maxDays) {
-      days.push({ day: '' });
+      // add leading or trailing cells
+      days.push({ year, month, day: '' });
     } else {
       days.push({
+        year,
+        month,
         day: i,
         isCurrent: i === currentDay
       });
