@@ -15,6 +15,17 @@ export const splitDaysIntoWeeks = (array, chunk) => {
   return transformed;
 };
 
+export const getDateObj = (year, month, day) => {
+  const date = new Date(year, month, day);
+  return {
+    year: date.getFullYear(),
+    month: date.getMonth(),
+    monthName: months[date.getMonth()],
+    day: date.getDate(),
+    dayName: weekdays[date.getDay()]
+  }
+}
+
 export const getCurrentDateObj = () => {
   const date = new Date(Date.now());
   return {
@@ -34,7 +45,11 @@ export const getMonthTotal = (year, month) => {
   return new Date(year, month + 1, 0).getDate();
 };
 
-export const getDays = (maxDays, currentDay, firstWeekdayIndex) => {
+export const getDays = (year, month, currentDate) => {
+  console.log(year, month, currentDate);
+  const maxDays = getMonthTotal(year, month);
+  const firstWeekdayIndex = getFirstDayIndex(year, month);
+
   const days = [];
   const monthStart = 1;
 
@@ -50,6 +65,14 @@ export const getDays = (maxDays, currentDay, firstWeekdayIndex) => {
   // if loop index continues after current month's max days
   // then insert trailing cells for next month
   for (let i = monthStart - firstWeekdayIndex, l = maxCells; i <= l; i++) {
+    const currentDay = (
+      year === currentDate.year &&
+      month === currentDate.month &&
+      currentDate.day
+    ) ?
+      currentDate.day :
+      -1;
+
     if (i < monthStart || i > maxDays) {
       days.push({ day: '' });
     } else {

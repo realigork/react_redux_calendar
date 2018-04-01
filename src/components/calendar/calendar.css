@@ -1,8 +1,11 @@
+.calendarWrapper {
+  margin: 50px 0;
+}
+
 .calendar {
   width: 100%;
   table-layout: fixed;
   border-collapse: collapse;
-  margin: 50px 0;
 }
 
 .calendar td {
@@ -10,3 +13,37 @@
   vertical-align: top;
 }
 
+.calendarMonthControls {
+  display: flex;
+  width: 100%;
+}
+
+.calendarMonthPrev,
+.calendarMonthNext {
+  flex: 1;
+}
+
+.calendarMonthNext {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.iconLeft {
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  margin-top: -6px;
+}
+
+.iconRight {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  margin-top: -6px;
+}
+
+.iconLeft svg,
+.iconRight svg {
+  height: 12px;
+  fill: tomato;
+}

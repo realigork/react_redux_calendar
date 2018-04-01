@@ -55,3 +55,15 @@ export const closeReminderForm = () => {
     type: actions.CLOSE_REMINDER_FORM
   }
 };
+
+export const setPrevMonth = () => {
+  return {
+    type: actions.SET_PREV_MONTH
+  }
+};
+
+export const setNextMonth = () => {
+  return {
+    type: actions.SET_NEXT_MONTH
+  }
+};
