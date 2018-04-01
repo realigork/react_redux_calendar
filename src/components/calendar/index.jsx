@@ -118,8 +118,8 @@ class Calendar extends Component {
 
     return (
       <div className={classes.calendarWrapper}>
-        <div className={classes.calendarMonthControls}>
-          <div className={classes.calendarMonthPrev}>
+        <div className={classes.calendarHeader}>
+          <div className={classes.calendarHeaderCol}>
             <button onClick={this.props.onSetPrevMonth}>
               <span className={classes.iconLeft}>
                 <svg viewBox="0 0 500 500">
@@ -133,7 +133,10 @@ class Calendar extends Component {
               Previous Month
             </button>
           </div>
-          <div className={classes.calendarMonthNext}>
+          <div className={classes.calendarHeaderCol}>
+            <h2 className={classes.calendarTitle}>{caption}</h2>
+          </div>
+          <div className={classes.calendarHeaderCol}>
             <button onClick={this.props.onSetNextMonth}>
               Next Month
               <span className={classes.iconRight}>
@@ -150,11 +153,6 @@ class Calendar extends Component {
         </div>
         <table className={classes.calendar}>
           <thead>
-            <tr>
-              <th colSpan="7">
-                <h2>{caption}</h2>
-              </th>
-            </tr>
             <tr>
               {renderWeekdays}
             </tr>

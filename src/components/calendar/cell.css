@@ -52,7 +52,7 @@
 }
 
 .reminderIcon svg {
-  fill: tomato;
+  fill: #555;
   width: 16px;
 }
 
@@ -63,4 +63,8 @@
 .reminderBtn:hover {
   border-color: tomato;
   cursor: pointer;
+}
+
+.reminderBtn:hover svg {
+  fill: tomato;
 }

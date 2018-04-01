@@ -2,23 +2,3 @@
   width: 960px;
   margin: 0 auto;
 }
-
-:global .btn-alt {
-  background: none;
-  border-color: #fff;
-  color: #888;
-}
-
-:global .btn-alt:hover {
-  background: none;
-  border-color: tomato;
-  color: tomato;
-}
-
-:global .btn-group button {
-  margin-left: 10px;
-}
-
-:global .btn-group button:first-child {
-  margin-left: 0;
-}

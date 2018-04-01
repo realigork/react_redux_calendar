@@ -13,37 +13,40 @@
   vertical-align: top;
 }
 
-.calendarMonthControls {
+.calendarHeader {
   display: flex;
   width: 100%;
 }
 
-.calendarMonthPrev,
-.calendarMonthNext {
+.calendarHeaderCol {
   flex: 1;
+  align-self: center;
 }
 
-.calendarMonthNext {
+.calendarHeaderCol:last-child {
   display: flex;
   justify-content: flex-end;
+}
+
+.calendarTitle {
+  text-align: center;
 }
 
 .iconLeft {
   position: absolute;
   top: 50%;
-  left: 5px;
+  left: 10px;
   margin-top: -6px;
 }
 
 .iconRight {
   position: absolute;
   top: 50%;
-  right: 5px;
+  right: 10px;
   margin-top: -6px;
 }
 
 .iconLeft svg,
 .iconRight svg {
   height: 12px;
-  fill: tomato;
 }

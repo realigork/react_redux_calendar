@@ -1,0 +1,56 @@
+button {
+  outline: none;
+  display: inline-block;
+  background: none;
+  color: #555;
+  text-transform: uppercase;
+  border: 1px solid #eee;
+  padding: 10px 30px;
+  margin: 10px 0;
+  position: relative;
+  transition: 200ms;
+}
+
+button[disabled],
+button[disabled]:hover,
+button[disabled]:active {
+  background: none;
+  color: #ccc;
+  border-color: #f2f2f2;
+  cursor: default;
+}
+
+button:hover {
+  border-color: tomato;
+  color: tomato;
+  cursor: pointer;
+}
+
+button svg {
+  color: #555;
+  transition: 200ms;
+}
+
+button:hover svg {
+  fill: tomato;
+}
+
+:global .btn-alt {
+  background: none;
+  border-color: #fff;
+  color: #888;
+}
+
+:global .btn-alt:hover {
+  background: none;
+  border-color: tomato;
+  color: tomato;
+}
+
+:global .btn-group button {
+  margin-left: 10px;
+}
+
+:global .btn-group button:first-child {
+  margin-left: 0;
+}
