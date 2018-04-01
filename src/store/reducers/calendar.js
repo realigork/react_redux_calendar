@@ -11,6 +11,10 @@ import {
   getMonthTotal,
 } from '../../utils/date';
 
+import {
+  validateReminderForm
+} from '../../utils/validation';
+
 const dateObj = getCurrentDateObj();
 const { year, month, day } = dateObj;
 const totalDays = getMonthTotal(year, month);
@@ -44,6 +48,22 @@ const reducer = (state = initialState, action) => {
         ...state,
         reminderForm: REMINDER_FORM_DEFAULT_DATA,
         showPopup: false
+      }
+
+    case actions.REMINDER_INPUT_CHANGE:
+      const reminderForm = Object.assign({}, state.reminderForm);
+      let errors = [];
+      reminderForm[action.id] = action.value;
+
+      const validated = validateReminderForm(reminderForm);
+      if (validated.length) {
+        errors = validated;
+      }
+
+      return {
+        ...state,
+        errors: [...errors],
+        reminderForm: {...reminderForm}
       }
 
     default:
