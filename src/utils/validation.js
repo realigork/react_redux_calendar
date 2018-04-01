@@ -1,6 +1,8 @@
 export const validateReminderForm = (formData) => {
-  const start = parseInt(formData.start, 10);
-  const end = parseInt(formData.end, 10);
+  const data = Object.assign({}, formData);
+
+  const start = parseInt(data.start, 10);
+  const end = parseInt(data.end, 10);
   const errors = [];
 
   if (start > end) {
@@ -11,7 +13,7 @@ export const validateReminderForm = (formData) => {
     });
   }
 
-  if (formData.text.length > 30) {
+  if (data.text.length > 30) {
     errors.push({
       error: true,
       field: 'text',

@@ -20,14 +20,11 @@ export const REMINDER_FORM_DEFAULT_DATA = {
 
 export const getReminderById = (id, reminders) => {
   const array = reminders.slice(0);
-  return array.filter((item) => {
+  const reminder = array.filter((item) => {
     return item.id === id;
   });
-};
 
-export const getReminderIndexById = (id, reminders) => {
-  const array = reminders.slice(0);
-  return array.findIndex(item => item.id === id);
+  return reminder[0];
 };
 
 export const removeReminderByIndex = (index, reminders) => {
@@ -45,4 +42,16 @@ export const updateReminderByIndex = (index, reminders, updated) => {
     updated,
     ...array.slice(index+1,)
   ]
+};
+
+export const getReminderByDay = (reminders, day) => {
+  const dayReminders = reminders.slice(0);
+  let reminder = null;
+  if (dayReminders.length) {
+    reminder = dayReminders.filter((item) => {
+      return item.day === day;
+    });
+  }
+
+  return reminder;
 };

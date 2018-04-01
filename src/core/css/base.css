@@ -19,6 +19,15 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
+h2 {
+  font-weight: bold;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 12px;
+}
+
 ul {
   list-style: none;
   margin: 0;
@@ -39,6 +48,7 @@ td {
 }
 
 button {
+  outline: none;
   display: inline-block;
   background: none;
   color: tomato;
@@ -48,7 +58,26 @@ button {
   transition: 200ms;
 }
 
+button[disabled],
+button[disabled]:hover,
+button[disabled]:active {
+  color: #ccc;
+  border-color: #f2f2f2;
+  cursor: default;
+}
+
 button:hover {
   border-color: tomato;
   cursor: pointer;
+}
+
+th, td {
+  border: 1px solid #eee;
+  position: relative;
+  overflow: hidden;
+}
+
+th {
+  padding: 5px;
+  font-size: 14px;
 }

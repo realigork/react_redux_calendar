@@ -21,10 +21,15 @@ const ReminderForm = (props) => {
   } = props;
 
   let controls = null;
+  let isDisabled = errors.length > 0;
   if (formData.editing) {
     controls = (
       <div className="btn-group">
-        <button className={classes.submitBtn} onClick={onUpdate}>
+        <button
+          className={classes.submitBtn}
+          onClick={onUpdate}
+          disabled={isDisabled}
+        >
           Update
         </button>
         <button className="btn-alt" onClick={onRemove}>
@@ -34,7 +39,11 @@ const ReminderForm = (props) => {
     );
   } else {
     controls = (
-      <button className={classes.submitBtn} onClick={onSubmit}>
+      <button
+        className={classes.submitBtn}
+        onClick={onSubmit}
+        disabled={isDisabled}
+      >
         Add
       </button>
     )
