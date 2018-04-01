@@ -35,7 +35,16 @@ const reducer = (state = initialState, action) => {
   switch(action.type) {
     case actions.ADD_REMINDER:
       return {
-        ...state
+        ...state,
+        reminders: [
+          ...state.reminders,
+          {
+            ...state.reminderForm,
+            id: state.reminders.length
+          }
+        ],
+        reminderForm: REMINDER_FORM_DEFAULT_DATA,
+        showPopup: false
       };
 
     case actions.EDIT_REMINDER:

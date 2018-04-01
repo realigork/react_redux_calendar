@@ -39,23 +39,12 @@ class Calendar extends Component {
     this.renderWeekdays = this.renderWeekdays.bind(this);
     this.renderDays = this.renderDays.bind(this);
     this.renderDaysRow = this.renderDaysRow.bind(this);
-    this.addReminder = this.addReminder.bind(this);
     this.renderReminderForm = this.renderReminderForm.bind(this);
     this.onReminderFormInputChange = this.onReminderFormInputChange.bind(this);
     this.onReminderFormSubmit = this.onReminderFormSubmit.bind(this);
     this.onReminderClickHandler = this.onReminderClickHandler.bind(this);
     this.onRemoveReminder = this.onRemoveReminder.bind(this);
     this.onUpdateReminder = this.onUpdateReminder.bind(this);
-  }
-
-  addReminder() {
-    if (this.props.reminderForm.day > 0) {
-      const reminders = this.props.reminders.slice(0);
-      const reminder = Object.assign({}, this.props.reminderForm);
-      reminder.id = reminders.length;
-      reminders.push(reminder);
-      this.setState({ reminders });
-    }
   }
 
   onReminderFormInputChange(e) {
@@ -66,8 +55,7 @@ class Calendar extends Component {
 
   onReminderFormSubmit(e) {
     e.preventDefault();
-    this.addReminder();
-    setTimeout(this.props.onCloseReminderForm, 0);
+    this.props.onAddReminder();
   }
 
   onRemoveReminder(event, id) {
@@ -212,7 +200,8 @@ const mapDispatchToProps = dispatch => {
     onShowReminderForm: (day) => dispatch(calendarActions.showNewReminderForm(day)),
     onCloseReminderForm: () => dispatch(calendarActions.closeReminderForm()),
     onReminderInputChange: (id, value) => dispatch(calendarActions.changeReminderInput(id, value)),
-    onSelectReminderColor: (i) => dispatch(calendarActions.selectReminderColor(i))
+    onSelectReminderColor: (i) => dispatch(calendarActions.selectReminderColor(i)),
+    onAddReminder: () => dispatch(calendarActions.addReminder())
   }
 }
 
