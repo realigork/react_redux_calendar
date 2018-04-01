@@ -2,7 +2,7 @@ import React from 'react';
 
 import Input from '../UI/Input';
 import Fieldset from '../UI/Form/Fieldset';
-import { REMINDER_COLORS } from '../../utils/reminder';
+import Colors from '../UI/Colors';
 import { generateDayHours } from '../../utils/date';
 
 import classes from './reminder_form.css';
@@ -89,22 +89,7 @@ const ReminderForm = (props) => {
         </Fieldset>
 
         <Fieldset label="colour" errors={errors}>
-          <ul className={classes.reminderColorList}>
-            {REMINDER_COLORS.map((style, index) => {
-              const colorClass = selectedColor && selectedColor.id === style.id ?
-                classes.reminderColorSelected :
-                classes.reminderColor;
-
-              return (
-                <li
-                  key={style.id}
-                  className={colorClass}
-                  style={style}
-                  onClick={() => { onColorSelect(index); }}
-                />
-              );
-            })}
-          </ul>
+          <Colors selected={selectedColor} onSelect={onColorSelect} />
         </Fieldset>
 
         <Fieldset label="text" errors={errors}>

@@ -1,0 +1,26 @@
+.colors {
+  display: flex;
+}
+
+.color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  transition: 200ms;
+}
+
+.color:hover {
+  border-color: #555;
+}
+
+.colorSelected {
+  composes: color;
+  border-color: #555;
+  cursor: default;
+}
+
+.colorSelected:hover {
+  border-color: #555;
+  cursor: default;
+}

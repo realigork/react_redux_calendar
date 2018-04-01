@@ -24,30 +24,3 @@
   margin-top: 5px;
   fill: #aaa;
 }
-
-.reminderColorList {
-  display: flex;
-}
-
-.reminderColor {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  transition: 200ms;
-}
-
-.reminderColor:hover {
-  border-color: #555;
-}
-
-.reminderColorSelected {
-  composes: reminderColor;
-  border-color: #555;
-  cursor: default;
-}
-
-.reminderColorSelected:hover {
-  border-color: #555;
-  cursor: default;
-}
