@@ -34,7 +34,9 @@ const Cell = ({
   return (
     <td className={cellClass}>
       <h4 className={dayClass}>{day}</h4>
-      {reminderList}
+      <div className={classes.reminderWrapper}>
+        {reminderList}
+      </div>
       <div className={classes.reminderBtn} onClick={onClick}>
         <span className={classes.reminderIcon}>
           <svg

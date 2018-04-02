@@ -2,13 +2,18 @@ button {
   outline: none;
   display: inline-block;
   background: none;
+  border: 1px solid #eee;
   color: #555;
   text-transform: uppercase;
-  border: 1px solid #eee;
   padding: 10px 30px;
   margin: 10px 0;
   position: relative;
   transition: 200ms;
+}
+
+label:hover button {
+  border: 1px solid #eee;
+  color: #555;
 }
 
 button[disabled],

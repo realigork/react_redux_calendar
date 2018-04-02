@@ -2,6 +2,7 @@ import React from 'react';
 
 import Input from '../UI/Input';
 import Fieldset from '../UI/Form/Fieldset';
+import FieldsetButton from '../UI/Form/Fieldset/fieldset_button';
 import Colors from '../UI/Colors';
 import { generateDayHours } from '../../utils/date';
 
@@ -102,9 +103,9 @@ const ReminderForm = (props) => {
           />
         </Fieldset>
 
-        <Fieldset>
+        <FieldsetButton>
           {controls}
-        </Fieldset>
+        </FieldsetButton>
       </form>
     </div>
   );

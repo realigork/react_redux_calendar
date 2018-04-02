@@ -68,3 +68,16 @@
 .reminderBtn:hover svg {
   fill: tomato;
 }
+
+.reminderWrapper > div {
+  transition: 200ms;
+}
+
+.reminderWrapper:hover > div {
+  opacity: 0.8;
+}
+
+.reminderWrapper:hover > div:hover {
+  opacity: 1;
+  cursor: pointer;
+}
